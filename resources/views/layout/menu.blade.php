@@ -6,8 +6,12 @@
         <a class="py-2 d-none d-md-inline-block" href="/">Home</a>
         <a class="py-2 d-none d-md-inline-block" href="/pakaian/create">Unggah Desain</a>
         <a class="py-2 d-none d-md-inline-block" href="/pemesanan">Pemesanan</a>
-        <a class="py-2 d-none d-md-inline-block" href="/login">Login</a>
-        <a class="py-2 d-none d-md-inline-block" href="/logout">Logout</a>
-        <a class="py-2 d-none d-md-inline-block" href="/admin">Admin</a>
+        @guest
+          <a class="py-2 d-none d-md-inline-block" href="/login">Login</a>
+          <a class="py-2 d-none d-md-inline-block" href="/register">Register</a>
+          <a class="py-2 d-none d-md-inline-block" href="/admin">Admin</a>
+        @else
+          <a class="py-2 d-none d-md-inline-block" href="/logout">Logout</a>
+        @endif
       </div>
     </nav>

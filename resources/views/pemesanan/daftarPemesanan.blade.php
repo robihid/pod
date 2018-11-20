@@ -23,6 +23,17 @@
     </div>
 @endif
 <h1>Daftar Pemesanan</h1>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <a class="dropdown-item" href="?filter=1">Belum Dibayar</a>
+    <a class="dropdown-item" href="?filter=2">Pembayaran Menunggu Verifikasi</a>
+    <a class="dropdown-item" href="?filter=3">Proses Produksi</a>
+    <a class="dropdown-item" href="?filter=4">Sudah Dikirim</a>
+  </div>
+</div>
 <div class="row">
     @foreach($pemesanans as $pemesanan)
         @php

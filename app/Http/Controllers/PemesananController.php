@@ -74,9 +74,22 @@ class PemesananController extends Controller {
 
 	// KHUSUS ADMIN
 	// menampilkan semua pesanan
-	public function daftarPemesanan() {
+	public function daftarPemesanan(Request $request) {
 		$pakaians = Pakaian::all();
 		$pemesanans = Pemesanan::all();
+		$filter = $request->query('filter');
+		if ($filter) {
+			if ($filter == '1') {
+				// Pemesanan yang belum dibayar
+				$pemesanans = Pemesanan::where('status_pembayaran', 'Belum Dibayar')->get();
+			} else if ($filter == '2') {
+				$pemesanans = Pemesanan::where('status_pembayaran', 'Menunggu Pengecekan')->get();
+			} else if ($filter == '3') {
+				$pemesanans = Pemesanan::where('status_pembayaran', 'Pembayaran Diterima')->where('status_pengiriman', 'Belum Dikirim')->get();
+			} else if ($filter == '4') {
+				$pemesanans = Pemesanan::where('status_pembayaran', 'Pembayaran Diterima')->where('status_pengiriman', '!=', 'Belum Dikirim')->get();
+			}
+		}
 		return view('pemesanan.daftarPemesanan', compact('pemesanans', 'pakaians'));
 	}
 

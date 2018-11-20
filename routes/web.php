@@ -19,7 +19,7 @@ PemesananController@show 		--90
 
 ----------ADMIN----------
 Lihat Daftar Pemesanan
-PemesananController@daftarPemesanan		--80	--tambahin filter
+PemesananController@daftarPemesanan		--90
 
 Terima Pembayaran
 PemesananController@terimaPembayaran  --90
