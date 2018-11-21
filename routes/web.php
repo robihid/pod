@@ -26,6 +26,9 @@ PemesananController@terimaPembayaran  --90
 
 Kirim Barang
 PemesananController@kirimBarang		--90
+
+Lihat Statistik Penjualan
+PemesananController@statistik
  */
 
 Route::get('/', function () {
@@ -47,6 +50,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/daftarPemesanan', 'PemesananController@daftarPemesanan')->name('pemesanan.daftarPemesanan')->middleware('auth:admin');
 Route::get('/terimaPembayaran/{pemesanan}', 'PemesananController@terimaPembayaran')->name('pemesanan.terimaPembayaran')->middleware('auth:admin');
 Route::patch('/kirimBarang/{pemesanan}', 'PemesananController@kirimBarang')->name('pemesanan.kirimBarang')->middleware('auth:admin');
+Route::get('/batalkan/{pemesanan}', 'PemesananController@batalkan')->name('pemesanan.batalkan')->middleware('auth:admin');
+Route::get('/statistik', 'PemesananController@statistik')->name('pemesanan.statsitik'); //->middleware('auth:admin');
 
 // User routes
 Route::resource('/pakaian', 'PakaianController', [

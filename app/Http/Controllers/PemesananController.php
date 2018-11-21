@@ -68,10 +68,6 @@ class PemesananController extends Controller {
 		return redirect()->route('pemesanan.index')->with('success', 'Pembayaran Anda Berhasil Dikonfirmasi dan Menunggu Pengecekan');
 	}
 
-	public function destroy($id) {
-		//
-	}
-
 	// KHUSUS ADMIN
 	// menampilkan semua pesanan
 	public function daftarPemesanan(Request $request) {
@@ -114,5 +110,27 @@ class PemesananController extends Controller {
 		$pemesanan->save();
 
 		return redirect()->route('pemesanan.daftarPemesanan')->with('success', 'Barang Berhasil Dikirim');
+	}
+
+	// KHUSUS ADMIN
+	// membatalkan pemesanan
+	// hanya bisa untuk pemesanan yang belum dibayar
+	public function batalkan(Pemesanan $pemesanan) {
+		$pemesanan->status_pembayaran = "Dibatalkan";
+		$pemesanan->id_admin = Auth::guard('admin')->id();
+		$pemesanan->save();
+
+		return redirect()->route('pemesanan.daftarPemesanan')->with('success', 'Pemesanan Berhasil Dibatalkan');
+	}
+
+	// KHUSUS ADMIN
+	// menampilkan statistik penjualan
+	public function statistik() {
+		$statistik = [];
+		$statistik['totalPenjualan'] = Pemesanan::all()->count();
+		$statistik['totalOmset'] = Pemesanan::where('status_pengiriman', '!=', 'Belum Dikirim')->sum('total');
+		$statistik['tes'] = Pemesanan::all();
+		return $statistik;
+		// return view('pemesanan.statistik', compact('totalPenjualan'));
 	}
 }

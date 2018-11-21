@@ -18,6 +18,6 @@ class AdminController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		return view('admin');
+		return view('pemesanan.daftarPemesanan');
 	}
 }

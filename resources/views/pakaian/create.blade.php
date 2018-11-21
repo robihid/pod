@@ -14,9 +14,20 @@
 			<a class="btn btn-info btn-lg" href="#">Unduh Size Chart Pakaian</a>
 	</div>
 	{!! Form::open(['action' => 'PakaianController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+		{{-- <div class="form-group">
+        {{Form::file('raw')}}
+    </div>
 		<div class="form-group">
         {{Form::file('gambar')}}
-    </div>
+    </div> --}}
+    <div class="form-group">
+	    <label for="raw">Gambar Asli</label>
+	    <input type="file" class="form-control-file" id="raw" name="raw">
+	  </div>
+	  <div class="form-group">
+	    <label for="raw">Gambar Pakaian</label>
+	    <input type="file" class="form-control-file" id="gambar" name="gambar">
+	  </div>
     <div class="form-group">
 	    <label for="ukuran">Pilih Ukuran</label>
 	    <select class="form-control" id="ukuran" name="ukuran">

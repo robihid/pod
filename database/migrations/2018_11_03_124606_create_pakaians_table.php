@@ -13,7 +13,8 @@ class CreatePakaiansTable extends Migration {
 	public function up() {
 		Schema::create('pakaians', function (Blueprint $table) {
 			$table->increments('id');
-			$table->text('gambar');
+			$table->string('raw');
+			$table->string('gambar');
 			$table->string('ukuran');
 			$table->integer('id_user');
 			$table->timestamps();

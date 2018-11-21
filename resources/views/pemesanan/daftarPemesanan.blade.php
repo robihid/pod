@@ -1,20 +1,5 @@
 @extends('layout.app')
 
-{{-- @section('content')
-	<p>Daftar Pemesanan</p>
-    @foreach($pemesanans as $pemesanan)
-			<p>ID Pemesanan: {{ $pemesanan->id }} 		<a href="/terimaPembayaran/{{ $pemesanan->id }}">Terima Pembayaran</a></p>
-			<p>Input nomor resi:</p>
-			{!! Form::model($pemesanan, ['method' => 'PATCH','route' => ['pemesanan.kirimBarang', $pemesanan->id]]) !!}
-	    <div class="form-group">
-        {{Form::label('no_resi', 'Nomor Resi')}}
-        {{Form::text('no_resi', '', ['class' => 'form-control', 'placeholder' => 'Nomor Resi'])}}
-    </div>
-        <input type="submit">
-    {!! Form::close() !!}
-    @endforeach
-@endsection --}}
-
 @section('content')
 
 @if ($message = Session::get('success'))
@@ -49,13 +34,18 @@
             <img class="card-img-top" src="/storage/gambar/{{ $pakaian->gambar }}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">ID Pemesanan: {{ $pemesanan->id }}</h5>
-                @if ($pemesanan->status_pembayaran == "Belum Dibayar")
+                @if ($pemesanan->status_pembayaran == "Dibatalkan")
+                    <div class="alert alert-danger" role="alert">
+                        Dibatalkan
+                    </div>
+                @elseif ($pemesanan->status_pembayaran == "Belum Dibayar")
                     <div class="alert alert-secondary" role="alert">
                         Belum Dibayar
                     </div>
+                    <a href="{{ route('pemesanan.batalkan',$pemesanan->id) }}" class="btn btn-danger">Batalkan Pemesanan</a>
 
                 @elseif ($pemesanan->status_pembayaran == "Menunggu Pengecekan")
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#terimaModal{{ $pemesanan->id }}">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#terimaModal{{ $pemesanan->id }}">
                       Terima Pembayaran
                     </button>
                     <!-- Modal -->
@@ -73,7 +63,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a href="{{ route('pemesanan.terimaPembayaran',$pemesanan->id) }}" class="btn btn-danger">Terima Pembayaran</a>
+                            <a href="{{ route('pemesanan.terimaPembayaran',$pemesanan->id) }}" class="btn btn-warning">Terima Pembayaran</a>
                           </div>
                         </div>
                       </div>
@@ -145,6 +135,8 @@
                         <p>Tanggal Pemesanan    : {{ $pemesanan->tgl_pemesanan }}</p>
                         <p>Total                : {{ $pemesanan->total }}</p>
                         <p>Nomor Rekening       : {{ $pemesanan->norek }}</p>
+                        <a href="/storage/raw/{{ $pakaian->raw }}" target="_blank" class="btn btn-info" role="button" aria-pressed="true">Gambar RAW</a>
+                        <a href="/storage/gambar/{{ $pakaian->gambar }}" target="_blank" class="btn btn-info" role="button" aria-pressed="true">Gambar Pakaian</a>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
