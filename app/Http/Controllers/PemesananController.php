@@ -76,7 +76,6 @@ class PemesananController extends Controller {
 		$filter = $request->query('filter');
 		if ($filter) {
 			if ($filter == '1') {
-				// Pemesanan yang belum dibayar
 				$pemesanans = Pemesanan::where('status_pembayaran', 'Belum Dibayar')->get();
 			} else if ($filter == '2') {
 				$pemesanans = Pemesanan::where('status_pembayaran', 'Menunggu Pengecekan')->get();

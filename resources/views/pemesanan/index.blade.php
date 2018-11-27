@@ -31,9 +31,15 @@
 					    Pembayaran <strong>{{ $pemesanan->status_pembayaran }}</strong>
 						</div>
 					@elseif ($pemesanan->status_pembayaran == "Pembayaran Diterima")
-						<div class="alert alert-success" role="alert">
-					    <strong>{{ $pemesanan->status_pengiriman }}</strong>
-						</div>
+						@if ($pemesanan->status_pengiriman == "Belum Dikirim")
+							<div class="alert alert-success" role="alert">
+						    <strong>Pemesanan anda dalam proses produksi, tunggu sampai {{ date('Y-m-d H:i:s', strtotime($pemesanan->updated_at. ' + 3 days')) }}</strong>
+							</div>
+						@else
+							<div class="alert alert-success" role="alert">
+						    <strong>{{ $pemesanan->status_pengiriman }}</strong>
+							</div>
+						@endif
 		      @endif
 		    </div>
 		  </div>

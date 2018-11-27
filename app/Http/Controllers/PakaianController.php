@@ -19,7 +19,7 @@ class PakaianController extends Controller {
 	public function store(Request $request) {
 		$this->validate($request, [
 			'raw' => 'image|required|max:1999',
-			'gambar' => 'image|required|max:1999',
+			'gambar' => 'image|required|max:4999',
 			'ukuran' => 'required',
 		]);
 
